@@ -1,16 +1,15 @@
 import asyncio
-from openai import AsyncAzureOpenAI
+from openai import AsyncOpenAI
 from council.config import Settings
 
 
 class LLMClient:
-    """Unified async LLM client for Azure AI Foundry with retry + rate limiting."""
+    """Unified async LLM client for Azure AI Foundry v1 API with retry + rate limiting."""
 
     def __init__(self, settings: Settings):
-        self.client = AsyncAzureOpenAI(
-            azure_endpoint=settings.azure_endpoint.rstrip("/"),
+        self.client = AsyncOpenAI(
+            base_url=f"{settings.azure_endpoint.rstrip('/')}/openai/v1/",
             api_key=settings.azure_api_key,
-            api_version=settings.azure_api_version,
         )
         self.semaphore = asyncio.Semaphore(settings.max_concurrent)
 

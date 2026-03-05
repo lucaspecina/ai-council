@@ -29,9 +29,6 @@ class Settings:
     azure_api_key: str = field(
         default_factory=lambda: os.environ.get("AZURE_FOUNDRY_API_KEY", "")
     )
-    azure_api_version: str = field(
-        default_factory=lambda: os.environ.get("AZURE_FOUNDRY_API_VERSION", "2024-10-21")
-    )
     max_concurrent: int = field(
         default_factory=lambda: int(os.environ.get("MAX_CONCURRENT_CALLS", "10"))
     )

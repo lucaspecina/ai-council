@@ -2,17 +2,18 @@
 
 ## Project Overview
 Multi-agent AI council system where multiple frontier LLMs debate to help Lucas make decisions.
-All LLM calls go through Azure AI Foundry using the `openai` SDK (`AsyncAzureOpenAI`).
+All LLM calls go through Azure AI Foundry v1 API using the `openai` SDK (`AsyncOpenAI`).
 
 ## Tech Stack
 - Python 3.12+ with asyncio
-- `openai` SDK (AsyncAzureOpenAI for Foundry)
+- `openai` SDK (AsyncOpenAI with base_url for Foundry v1 API - NOT AsyncAzureOpenAI)
 - No frameworks - pure Python, minimal dependencies
 
 ## Architecture
 - `src/council/` - main package
   - `config.py` - env vars, model registry, settings
-  - `llm.py` - unified async LLM client with retry + rate limiting
+  - `llm.py` - unified async LLM client (Foundry v1 API) with retry + rate limiting
+  - `memory.py` - loads context from Claude Code's project memory directory
   - `agent.py` - Agent class (role, model, personality)
   - `debate.py` - debate orchestrator (parallel opinions -> sequential rounds -> synthesis)
   - `synthesis.py` - synthesize debate into final output
