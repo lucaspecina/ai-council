@@ -7,7 +7,8 @@ All LLM calls go through Azure AI Foundry v1 API using the `openai` SDK (`AsyncO
 ## Tech Stack
 - Python 3.12+ with asyncio
 - `openai` SDK (AsyncOpenAI with base_url for Foundry v1 API - NOT AsyncAzureOpenAI)
-- No frameworks - pure Python, minimal dependencies
+- `rich` for terminal UI (panels, colors, spinners, markdown)
+- No web frameworks - pure Python, minimal dependencies
 
 ## Architecture
 - `src/council/` - main package
@@ -17,7 +18,14 @@ All LLM calls go through Azure AI Foundry v1 API using the `openai` SDK (`AsyncO
   - `agent.py` - Agent class (role, model, personality)
   - `debate.py` - debate orchestrator (parallel opinions -> sequential rounds -> synthesis)
   - `synthesis.py` - synthesize debate into final output
+  - `ui.py` - rich terminal output (panels, spinners, colors per agent)
 - `main.py` - CLI entry point
+
+## Sessions (next priority)
+- Sessions stored in `~/.ai-council/sessions/{session_id}/`
+- Each session has metadata.json + transcript.json
+- Interactive loop: after synthesis, terminal waits for follow-ups
+- Resume: `--continue` (last) or `--resume <id>`
 
 ## Models (Azure Foundry deployments)
 - gpt-5.3-chat

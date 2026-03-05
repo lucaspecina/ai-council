@@ -23,6 +23,22 @@ A designated synthesizer (rotating role) produces:
 - Confidence level
 - A friendly, clear explanation for Lucas
 
+### Phase 4: Follow-up (interactive loop)
+After synthesis, the terminal stays alive. Lucas can:
+- Ask follow-up questions that trigger new debate rounds with full prior context
+- Type "exit" or Ctrl+C to end the session
+- Resume later with `--continue` (last session) or `--resume <id>`
+
+### Session Persistence
+Each debate is a **session** stored in `~/.ai-council/sessions/{session_id}/`:
+- `metadata.json` — question, timestamp, agents, status (active/completed)
+- `transcript.json` — full agent histories, phases, synthesis results
+
+This allows:
+- Resuming debates across terminal sessions
+- Building long-running decision threads with multiple follow-ups
+- Future: feeding past decisions as context for new debates
+
 ## Design Principles
 - **Modular**: agents, roles, debate format - everything can change
 - **Parallel when possible**: independent operations run concurrently

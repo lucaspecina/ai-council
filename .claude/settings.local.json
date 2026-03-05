@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(conda:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(PYTHONIOENCODING=utf-8 conda run:*)",
+      "Bash(rm:*)"
     ]
   }
 }
